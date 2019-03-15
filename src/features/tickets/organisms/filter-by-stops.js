@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { FilterByStopsContext } from "./../atoms";
 
-import { Checkbox } from "@ui/molecules";
+import { Checkbox } from "@ui/atoms";
 
 const FilterByStopsView = () => {
   const { filterState, setFilterState } = useContext(FilterByStopsContext);
