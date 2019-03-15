@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { FilterByStopsContext } from "./../atoms";
 
+import { Checkbox } from "@ui/molecules";
+
 const FilterByStopsView = () => {
   const { filterState, setFilterState } = useContext(FilterByStopsContext);
 
@@ -45,56 +47,28 @@ const FilterByStopsView = () => {
 
   return (
     <>
-      <input
-        type="checkbox"
-        checked={isAllChecked}
-        onChange={handleToggleAll}
-      />{" "}
-      - все <br />
-      <input
-        type="checkbox"
+      <Checkbox data-key="0" checked={isAllChecked} onClick={handleToggleAll} />
+
+      <Checkbox
         data-key="0"
         checked={filterState[0]}
-        onChange={handleToggleOne}
-      />{" "}
-      - без пересадок{" "}
-      <button data-key="0" onClick={handleSingleChoice}>
-        только
-      </button>
-      <br />
-      <input
-        type="checkbox"
+        onClick={handleToggleOne}
+      />
+      <Checkbox
         data-key="1"
         checked={filterState[1]}
-        onChange={handleToggleOne}
-      />{" "}
-      - 1 пересадка{" "}
-      <button data-key="1" onClick={handleSingleChoice}>
-        только
-      </button>
-      <br />
-      <input
-        type="checkbox"
+        onClick={handleToggleOne}
+      />
+      <Checkbox
         data-key="2"
         checked={filterState[2]}
-        onChange={handleToggleOne}
-      />{" "}
-      - 2 пересадки{" "}
-      <button data-key="2" onClick={handleSingleChoice}>
-        только
-      </button>{" "}
-      <br />
-      <input
-        type="checkbox"
+        onClick={handleToggleOne}
+      />
+      <Checkbox
         data-key="3"
         checked={filterState[3]}
-        onChange={handleToggleOne}
-      />{" "}
-      - 3 пересадки{" "}
-      <button data-key="3" onClick={handleSingleChoice}>
-        только
-      </button>
-      <br />
+        onClick={handleToggleOne}
+      />
     </>
   );
 };

@@ -8,3 +8,6 @@ export { SidebarCol } from "./sidebar/sidebar-col";
 
 export { ButtonSwitch } from "./buttons/button-switch";
 export { ButtonSwitchGroup } from "./buttons/button-switch-group";
+
+export { CheckboxArrow } from "./checkbox/checkbox-arrow";
+export { CheckboxBox } from "./checkbox/checkbox-box";
