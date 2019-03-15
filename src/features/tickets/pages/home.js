@@ -7,11 +7,10 @@ import { sortByPriceAscending, filterTicketsByStops } from "@lib/tickets";
 
 import { MainTemplate } from "@ui/templates";
 import { Header } from "@features/common/organisms";
+import { Sidebar } from "@features/tickets/organisms";
 
-import { TicketList, TicketItem, FilterByStops } from "./../organisms";
+import { TicketList, TicketItem } from "./../organisms";
 import { FilterByStopsProvider, FilterByStopsContext } from "./../atoms";
-
-import { CurrencySwitch } from "@features/currency/organisms";
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = {};
@@ -27,16 +26,7 @@ const tickets = sortByPriceAscending(ticketsJSON.tickets);
 
 const TicketsHomeView = () => (
   <FilterByStopsProvider>
-    <MainTemplate
-      header={<Header />}
-      sidebar={
-        <>
-          <CurrencySwitch />
-
-          <FilterByStops />
-        </>
-      }
-    >
+    <MainTemplate header={<Header />} sidebar={<Sidebar />}>
       <FilterByStopsContext.Consumer>
         {({ filterState }) => (
           <TicketList

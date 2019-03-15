@@ -24,9 +24,9 @@ const Layout = styled.div`
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 
-  grid-template-columns: 232px 566px;
+  grid-template-columns: 23.2rem 56.6rem;
   grid-template-rows: auto 1fr;
-  grid-gap: 20px;
+  grid-gap: 2rem;
 
   grid-template-areas:
     "header header"
