@@ -1,7 +1,14 @@
 import React, { useContext } from "react";
+
 import { FilterByStopsContext } from "./../atoms";
 
-import { Checkbox } from "@ui/atoms";
+import {
+  Checkbox,
+  CheckboxList,
+  CheckboxListItem,
+  CheckboxListLabel,
+  CheckboxListExtra
+} from "@ui/atoms";
 
 const FilterByStopsView = () => {
   const { filterState, setFilterState } = useContext(FilterByStopsContext);
@@ -30,6 +37,8 @@ const FilterByStopsView = () => {
   };
 
   const handleSingleChoice = event => {
+    event.stopPropagation();
+
     const key = event.currentTarget.getAttribute("data-key");
 
     const filterKeys = Object.keys(filterState);
@@ -46,30 +55,53 @@ const FilterByStopsView = () => {
   };
 
   return (
-    <>
-      <Checkbox data-key="0" checked={isAllChecked} onClick={handleToggleAll} />
+    <CheckboxList>
+      <CheckboxListItem data-key="0" onClick={handleToggleAll}>
+        <Checkbox checked={isAllChecked} />
 
-      <Checkbox
-        data-key="0"
-        checked={filterState[0]}
-        onClick={handleToggleOne}
-      />
-      <Checkbox
-        data-key="1"
-        checked={filterState[1]}
-        onClick={handleToggleOne}
-      />
-      <Checkbox
-        data-key="2"
-        checked={filterState[2]}
-        onClick={handleToggleOne}
-      />
-      <Checkbox
-        data-key="3"
-        checked={filterState[3]}
-        onClick={handleToggleOne}
-      />
-    </>
+        <CheckboxListLabel>Все</CheckboxListLabel>
+      </CheckboxListItem>
+
+      <CheckboxListItem data-key="0" onClick={handleToggleOne}>
+        <Checkbox checked={filterState[0]} />
+
+        <CheckboxListLabel>Без пересадок</CheckboxListLabel>
+
+        <CheckboxListExtra data-key="0" onClick={handleSingleChoice}>
+          только
+        </CheckboxListExtra>
+      </CheckboxListItem>
+
+      <CheckboxListItem data-key="1" onClick={handleToggleOne}>
+        <Checkbox checked={filterState[1]} />
+
+        <CheckboxListLabel>1 пересадка</CheckboxListLabel>
+
+        <CheckboxListExtra data-key="1" onClick={handleSingleChoice}>
+          только
+        </CheckboxListExtra>
+      </CheckboxListItem>
+
+      <CheckboxListItem data-key="2" onClick={handleToggleOne}>
+        <Checkbox checked={filterState[2]} />
+
+        <CheckboxListLabel>2 пересадки</CheckboxListLabel>
+
+        <CheckboxListExtra data-key="2" onClick={handleSingleChoice}>
+          только
+        </CheckboxListExtra>
+      </CheckboxListItem>
+
+      <CheckboxListItem data-key="3" onClick={handleToggleOne}>
+        <Checkbox checked={filterState[3]} />
+
+        <CheckboxListLabel>3 пересадки</CheckboxListLabel>
+
+        <CheckboxListExtra data-key="3" onClick={handleSingleChoice}>
+          только
+        </CheckboxListExtra>
+      </CheckboxListItem>
+    </CheckboxList>
   );
 };
 

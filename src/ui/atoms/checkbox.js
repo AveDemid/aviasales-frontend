@@ -21,8 +21,8 @@ export const Checkbox = styled.div`
     content: "";
     width: 0.9rem;
     height: 0.7rem;
-    top: 5px;
-    left: 4px;
+    top: 0.6rem;
+    left: 0.5rem;
     z-index: 1;
     background-image: url(${CheckboxArrowUrl});
     opacity: ${props => (props.checked ? 1 : 0)};

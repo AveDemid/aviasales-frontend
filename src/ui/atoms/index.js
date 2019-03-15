@@ -10,3 +10,7 @@ export { ButtonSwitch } from "./buttons/button-switch";
 export { ButtonSwitchGroup } from "./buttons/button-switch-group";
 
 export { Checkbox } from "./checkbox";
+export { CheckboxList } from "./checkbox-list/checkbox-list";
+export { CheckboxListItem } from "./checkbox-list/checkbox-list-item";
+export { CheckboxListLabel } from "./checkbox-list/checkbox-list-label";
+export { CheckboxListExtra } from "./checkbox-list/checkbox-list-extra";
