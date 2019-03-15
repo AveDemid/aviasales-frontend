@@ -1,7 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { compose } from "recompose";
+import { connect } from "react-redux";
 
-const TicketItemView = ({ ticket }) => {
+import { currencySelectors } from "@features/currency";
+import { getPriceAtTheRate } from "@lib/currency";
+
+const mapStateToProps = state => ({
+  rate: currencySelectors.getValueCurrentCurrency(state),
+  currencyName: currencySelectors.getCurrentCurrency(state)
+});
+
+const mapDispatchToProps = {};
+
+const enhance = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+);
+
+const TicketItemView = ({ ticket, rate, currencyName }) => {
   const {
     arrival_date,
     arrival_time,
@@ -16,9 +35,11 @@ const TicketItemView = ({ ticket }) => {
     stops
   } = ticket;
 
+  const formattedPrice = getPriceAtTheRate(price, currencyName, rate);
+
   return (
     <p>
-      {origin_name} => {destination_name} | {price}
+      {origin_name} => {destination_name} | {formattedPrice}
     </p>
   );
 };
@@ -36,7 +57,9 @@ TicketItemView.propTypes = {
     origin_name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     stops: PropTypes.number.isRequired
-  }).isRequired
+  }).isRequired,
+  rate: PropTypes.number.isRequired,
+  currencyName: PropTypes.string.isRequired
 };
 
-export const TicketItem = TicketItemView;
+export const TicketItem = enhance(TicketItemView);

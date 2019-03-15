@@ -8,7 +8,9 @@ import { sortByPriceAscending, filterTicketsByStops } from "@lib/tickets";
 import { TicketList, TicketItem, FilterByStops } from "./../organisms";
 import { FilterByStopsProvider, FilterByStopsContext } from "./../atoms";
 
-const mapStateToProps = state => ({});
+import { CurrencySwitch } from "@features/currency/organisms";
+
+const mapStateToProps = () => ({});
 const mapDispatchToProps = {};
 
 const enhance = compose(
@@ -22,6 +24,11 @@ const tickets = sortByPriceAscending(ticketsJSON.tickets);
 
 const TicketsHomeView = () => (
   <FilterByStopsProvider>
+    <CurrencySwitch />
+
+    <br />
+    <br />
+
     <FilterByStops />
 
     <FilterByStopsContext.Consumer>
