@@ -5,6 +5,8 @@ import { compose } from "recompose";
 import ticketsJSON from "@fixtures/tickets.json";
 import { sortByPriceAscending, filterTicketsByStops } from "@lib/tickets";
 
+import { MainTemplate } from "@ui/templates";
+
 import { TicketList, TicketItem, FilterByStops } from "./../organisms";
 import { FilterByStopsProvider, FilterByStopsContext } from "./../atoms";
 
@@ -24,23 +26,27 @@ const tickets = sortByPriceAscending(ticketsJSON.tickets);
 
 const TicketsHomeView = () => (
   <FilterByStopsProvider>
-    <CurrencySwitch />
+    <MainTemplate
+      header={<>This is header</>}
+      sidebar={
+        <>
+          <CurrencySwitch />
 
-    <br />
-    <br />
-
-    <FilterByStops />
-
-    <FilterByStopsContext.Consumer>
-      {({ filterState }) => (
-        <TicketList
-          tickets={filterTicketsByStops(tickets, filterState)}
-          renderTicket={({ ticket, key }) => (
-            <TicketItem ticket={ticket} key={key} />
-          )}
-        />
-      )}
-    </FilterByStopsContext.Consumer>
+          <FilterByStops />
+        </>
+      }
+    >
+      <FilterByStopsContext.Consumer>
+        {({ filterState }) => (
+          <TicketList
+            tickets={filterTicketsByStops(tickets, filterState)}
+            renderTicket={({ ticket, key }) => (
+              <TicketItem ticket={ticket} key={key} />
+            )}
+          />
+        )}
+      </FilterByStopsContext.Consumer>
+    </MainTemplate>
   </FilterByStopsProvider>
 );
 
