@@ -1,6 +1,11 @@
 import React from "react";
 
-import { SidebarContainer, SidebarItem, SidebarItemTitle } from "@ui/atoms";
+import {
+  SidebarContainer,
+  SidebarItem,
+  SidebarItemTitle,
+  SidebarCol
+} from "@ui/atoms";
 import { CurrencySwitch } from "@features/currency/organisms";
 import { FilterByStops } from "./";
 
@@ -9,7 +14,9 @@ export const Sidebar = () => (
     <SidebarItem>
       <SidebarItemTitle>Валюта</SidebarItemTitle>
 
-      <CurrencySwitch />
+      <SidebarCol>
+        <CurrencySwitch />
+      </SidebarCol>
     </SidebarItem>
 
     <SidebarItem>

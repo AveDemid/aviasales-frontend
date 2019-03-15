@@ -4,8 +4,9 @@ import { compose } from "recompose";
 import { connect } from "react-redux";
 
 import { getCurrentCurrency, getCurrenciesByName } from "./../selectors";
-
 import { actions as currencyActions } from "./../symbiotes";
+
+import { ButtonSwitch, ButtonSwitchGroup } from "@ui/atoms";
 
 const mapStateToProps = state => ({
   currentCurrency: getCurrentCurrency(state),
@@ -35,16 +36,19 @@ const CurrencySwitchView = ({
     setCurrentCurrency(currency);
   };
 
-  return currencyNames.map(currency => (
-    <button
+  const buttonsSwitch = currencyNames.map(currency => (
+    <ButtonSwitch
       data-currency={currency}
       onClick={handleSetCurrentCurrency}
       key={currency}
       disabled={currentCurrency === currency}
+      isActive={currentCurrency === currency}
     >
       {currency}
-    </button>
+    </ButtonSwitch>
   ));
+
+  return <ButtonSwitchGroup>{buttonsSwitch}</ButtonSwitchGroup>;
 };
 
 CurrencySwitchView.propTypes = {
