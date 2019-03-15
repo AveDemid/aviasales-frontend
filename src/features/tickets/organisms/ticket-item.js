@@ -36,7 +36,7 @@ TicketItemView.propTypes = {
     origin_name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     stops: PropTypes.number.isRequired
-  })
+  }).isRequired
 };
 
 export const TicketItem = TicketItemView;
