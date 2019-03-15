@@ -15,5 +15,6 @@ export const GlobalStyles = createGlobalStyle`
   body {
     font-size: 1.6rem;
     font-family: "Anonymous Pro", sans-serif;
+    background-color: #f3f7fa;
   }
 `;

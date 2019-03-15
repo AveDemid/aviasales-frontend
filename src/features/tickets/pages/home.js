@@ -6,6 +6,7 @@ import ticketsJSON from "@fixtures/tickets.json";
 import { sortByPriceAscending, filterTicketsByStops } from "@lib/tickets";
 
 import { MainTemplate } from "@ui/templates";
+import { Header } from "@features/common/organisms";
 
 import { TicketList, TicketItem, FilterByStops } from "./../organisms";
 import { FilterByStopsProvider, FilterByStopsContext } from "./../atoms";
@@ -27,7 +28,7 @@ const tickets = sortByPriceAscending(ticketsJSON.tickets);
 const TicketsHomeView = () => (
   <FilterByStopsProvider>
     <MainTemplate
-      header={<>This is header</>}
+      header={<Header />}
       sidebar={
         <>
           <CurrencySwitch />
