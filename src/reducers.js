@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
+import { currencyReducer } from "@features/currency";
 
 export const rootReducer = combineReducers({
-  just4test: () => ({})
+  currency: currencyReducer
 });

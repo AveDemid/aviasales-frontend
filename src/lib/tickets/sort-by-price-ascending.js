@@ -1,0 +1,2 @@
+export const sortByPriceAscending = tickets =>
+  tickets.sort((a, b) => a.price - b.price);

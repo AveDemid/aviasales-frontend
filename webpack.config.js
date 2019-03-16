@@ -34,6 +34,14 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.(png|jpg|jpeg)$/,
+        loader: "file-loader",
+        options: {
+          name: "[name]_[hash].[ext]",
+          outputPath: "assets/fonts/"
+        }
       }
     ]
   },
