@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 
-import ticketsJSON from "@fixtures/tickets.json";
-import { sortByPriceAscending, filterTicketsByStops } from "@lib/tickets";
-
-import { MainTemplate } from "@ui/templates";
 import { Header } from "@features/common/organisms";
 import { Sidebar } from "@features/tickets/organisms";
+import { MainTemplate } from "@ui/templates";
+import { Spinner } from "@ui/molecules";
+import { filterTicketsByStops, sortByPriceAscending } from "@lib/tickets";
 
-import { TicketList, TicketItem } from "./../organisms";
 import { FilterByStopsProvider, FilterByStopsContext } from "./../atoms";
+import { TicketList, TicketItem } from "./../organisms";
+import { getTicketList, getFetchingStatus } from "./../selectors";
+import { loadTickets } from "./../effects";
 
-const mapStateToProps = () => ({});
-const mapDispatchToProps = {};
+const mapStateToProps = state => ({
+  tickets: getTicketList(state),
+  ticketsIsFetching: getFetchingStatus(state)
+});
+
+const mapDispatchToProps = {
+  loadTickets
+};
 
 const enhance = compose(
   connect(
@@ -22,25 +30,44 @@ const enhance = compose(
   )
 );
 
-const tickets = sortByPriceAscending(ticketsJSON.tickets);
+const TicketsHomeView = ({ loadTickets, tickets, ticketsIsFetching }) => {
+  useEffect(() => {
+    loadTickets();
+  }, []);
 
-const TicketsHomeView = () => (
-  <FilterByStopsProvider>
-    <MainTemplate header={<Header />} sidebar={<Sidebar />}>
-      <FilterByStopsContext.Consumer>
-        {({ filterState }) => (
-          <TicketList
-            tickets={filterTicketsByStops(tickets, filterState)}
-            renderTicket={({ ticket, key }) => (
-              <TicketItem ticket={ticket} key={key} />
-            )}
-          />
-        )}
-      </FilterByStopsContext.Consumer>
-    </MainTemplate>
-  </FilterByStopsProvider>
-);
+  const sortedTickets = sortByPriceAscending(tickets);
 
-TicketsHomeView.propTypes = {};
+  return (
+    <FilterByStopsProvider>
+      <MainTemplate header={<Header />} sidebar={<Sidebar />}>
+        <FilterByStopsContext.Consumer>
+          {({ filterState }) => {
+            const filteredTickets = filterTicketsByStops(
+              sortedTickets,
+              filterState
+            );
+
+            return ticketsIsFetching ? (
+              <Spinner />
+            ) : (
+              <TicketList
+                tickets={filteredTickets}
+                renderTicket={({ ticket, key }) => (
+                  <TicketItem ticket={ticket} key={key} />
+                )}
+              />
+            );
+          }}
+        </FilterByStopsContext.Consumer>
+      </MainTemplate>
+    </FilterByStopsProvider>
+  );
+};
+
+TicketsHomeView.propTypes = {
+  loadTickets: PropTypes.func.isRequired,
+  tickets: PropTypes.array.isRequired,
+  ticketsIsFetching: PropTypes.bool.isRequired
+};
 
 export const TicketsHomePage = enhance(TicketsHomeView);

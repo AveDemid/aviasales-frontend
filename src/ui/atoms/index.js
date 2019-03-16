@@ -30,3 +30,6 @@ export { TicketStops } from "./ticket/ticket-stops";
 export { TicketTime } from "./ticket/ticket-time";
 export { TicketWeekDay } from "./ticket/ticket-week-day";
 export { TicketNotFound } from "./ticket/ticket-not-found";
+
+export { SpinnerSVG } from "./spinner-svg";
+export { SpinnerContainer } from "./spinner-container";
